@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Hanoi Booking</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #3252DF 0%, #1E3A8A 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .profile-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #3252DF;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .profile-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: #f0f4ff;
+            color: #3252DF;
+        }
+
+        .sidebar-menu a.active {
+            background: #3252DF;
+            color: white;
+        }
+
+        .profile-main {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f8faff;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .recent-bookings {
+            margin-top: 40px;
+        }
+
+        .booking-card {
+            background: #f8faff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .booking-hotel {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .booking-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-confirmed {
+            background: #e6ffe6;
+            color: #008000;
+        }
+
+        .status-pending {
+            background: #fff3e6;
+            color: #cc7700;
+        }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .booking-detail-item {
+            font-size: 14px;
+        }
+
+        .booking-detail-label {
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .booking-detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #3252DF;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f0f4ff;
+            color: #333;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .logout-btn {
+            color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-header">
+        <div class="profile-header-content">
+            <div class="profile-avatar">
+                {{ user.full_name[0] if user.full_name else user.username[0] }}
+            </div>
+            <div class="profile-info">
+                <h1>{{ user.full_name or user.username }}</h1>
+                <p>{{ user.email }}</p>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">{{ user.bookings|length }}</div>
+                        <div class="stat-label">Bookings</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ user.reviews|length }}</div>
+                        <div class="stat-label">Reviews</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ user.created_at.strftime('%b %Y') }}</div>
+                        <div class="stat-label">Member Since</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="profile-content">
+            <div class="profile-sidebar">
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="/user" class="active">
+                            <i class="fas fa-user"></i>
+                            Profile Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/my-bookings">
+                            <i class="fas fa-calendar-check"></i>
+                            My Bookings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/my-reviews">
+                            <i class="fas fa-star"></i>
+                            My Reviews
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/account-settings">
+                            <i class="fas fa-cog"></i>
+                            Account Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="profile-main">
+                <h2 class="section-title">Personal Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Username</div>
+                        <div class="info-value">{{ user.username }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">{{ user.full_name or 'Not provided' }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">{{ user.email }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">{{ user.phone or 'Not provided' }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Account Status</div>
+                        <div class="info-value">{{ 'Active' if user.is_active else 'Inactive' }}</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Edit Profile
+                    </button>
+                </div>
+
+                {% if user.bookings %}
+                <section class="recent-bookings">
+                    <h2 class="section-title">Recent Bookings</h2>
+                    {% for booking in user.bookings[:3] %}
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <div class="booking-hotel">{{ booking.room.hotel.hotel_name }}</div>
+                            <div class="booking-status {{ 'status-confirmed' if booking.status == 'confirmed' else 'status-pending' }}">
+                                {{ booking.status.title() }}
+                            </div>
+                        </div>
+                        <div class="booking-details">
+                            <div class="booking-detail-item">
+                                <div class="booking-detail-label">Check-in</div>
+                                <div class="booking-detail-value">{{ booking.check_in.strftime('%b %d, %Y') }}</div>
+                            </div>
+                            <div class="booking-detail-item">
+                                <div class="booking-detail-label">Check-out</div>
+                                <div class="booking-detail-value">{{ booking.check_out.strftime('%b %d, %Y') }}</div>
+                            </div>
+                            <div class="booking-detail-item">
+                                <div class="booking-detail-label">Total Price</div>
+                                <div class="booking-detail-value">{{ '{:,.0f}'.format(booking.total_price) }} VND</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% if user.bookings|length > 3 %}
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="/my-bookings" class="btn btn-secondary">View All Bookings</a>
+                    </div>
+                    {% endif %}
+                </section>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
